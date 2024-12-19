@@ -13,63 +13,7 @@ app.get('/', (req, res) => {
     return res.status(234).send('Welcome to Mern Stack Development');
 });
 
-// Route to save a new book
-app.post('/books', async(req, res) => {
-    try {
-        if(
-            !req.body.title ||
-            !req.body.author ||
-            !req.body.publishYear
-        ) {
-            return res.status(400).send({
-                message:'Send all required fields: title, author, publishYear',
-            });
-        }
-        const newBook = {
-            title: req.body.title,
-            author: req.body.author,
-            publishYear: req.body.publishYear,
-        };
 
-        const book = await Book.create(newBook);
-
-
-        return res.status(201).send(book);
-
-    }catch(error) {
-        console.log(error.message);
-        res.status(500).send({message: error.message});
-    }
- });
-
- // Route for Get All Books from database
- app.get('/books', async (req, res) => {
-    try {
-        const books = await Book.find({});
-
-        return res.status(200).json({
-            count: books.length,
-            data: books
-        });
-    } catch (error) {
-        console.log(error.messaage);
-        res.status(500).send({ message: error.message });
-    }
- });
-
- // Route for Get One Books from database by id
- app.get('/books/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-
-        const book = await Book.findById(id);
-
-        return res.status(200).json(book);
-    } catch (error) {
-        console.log(error.messaage);
-        res.status(500).send({ message: error.message });
-    }
- });
 
 mongoose.connect(mongoDBURL)
 .then(() => {
