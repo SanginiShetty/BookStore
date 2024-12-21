@@ -15,6 +15,7 @@ const Home = () => {
     .get('http://localhost:5555/books')
     .then((res) => {
       setBooks(res.data.data);
+      setLoading(false);
     })
   })
   return (
@@ -24,4 +25,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Home;
