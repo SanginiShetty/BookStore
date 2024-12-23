@@ -20,8 +20,8 @@ const Home = () => {
     .catch((error) => {
       console.log(error);
       setLoading(false);
-    })
-  })
+    });
+  },[]);
   return (
     <div className= 'p-4'>
       <div className= 'flex justify-between items-center'>
@@ -32,7 +32,6 @@ const Home = () => {
       </div>
       {loading ? (
         <Spinner />
-
       ): (
         <table className= 'w-full border-separate border-spacing-2'>
           <thead>
