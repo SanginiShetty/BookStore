@@ -1,7 +1,7 @@
 import express from "express";
 import { PORT, mongoDBURL } from "./config.js";
 import mongoose from 'mongoose';
-import { Book } from './models/bookModels.js';
+// import { Book } from './models/bookModels.js';
 import bookRoute from './routes/bookRoutes.js';
 import cors from 'cors';
 
@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
     return res.status(234).send('Welcome to Mern Stack Development');
 });
 
-app.get('/books', bookRoute);
+app.use('/api', bookRoute);
 
 mongoose
 .connect(mongoDBURL)

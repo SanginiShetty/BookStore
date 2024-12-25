@@ -1,5 +1,6 @@
 import express from 'express';
 import { Book } from '../models/bookModels.js'
+import mongoose from 'mongoose';
 const router = express.Router();
 
 // Route to save a new book
@@ -106,4 +107,44 @@ router.delete('/books/:id', async(req,res) => {
     }
 });
 
+
+//book isn't found
+router.get('/books/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const book = await Book.findById(id);
+
+        if (!book) {
+            return res.status(404).json({ message: 'Book not found' });
+        }
+
+        return res.status(200).json(book);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send({ message: error.message });
+    }
+});
+
+//Validate the id before quering the database
+router.get('/books/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: 'Invalid book ID format' });
+        }
+
+        const book = await Book.findById(id);
+
+        if (!book) {
+            return res.status(404).json({ message: 'Book not found' });
+        }
+
+        return res.status(200).json(book);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send({ message: error.message });
+    }
+});
 export default router;

@@ -12,7 +12,7 @@ const ShowBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-    .get(`http://localhost:5555/books/${id}`) 
+    .get(`http://localhost:5555/api/books/${id}`) 
     .then((res) => {
       setBook(res.data);
       setLoading(false);
@@ -21,7 +21,7 @@ const ShowBook = () => {
       console.log(error);
       setLoading(false);
     });
-  }, []);
+  }, [id]);
 
   return (
     <div className='p-4'>
@@ -36,20 +36,24 @@ const ShowBook = () => {
             <span>{book._id}</span>
           </div>
           <div className='my-4'>
+            <span className='text-xl mr-4 text-gray-500'>Title</span>
+            <span>{book.title}</span>
+          </div>
+          <div className='my-4'>
             <span className='text-xl mr-4 text-gray-500'>Author</span>
-            <span>{book._author}</span>
+            <span>{book.author}</span>
           </div>
           <div className='my-4'>
             <span className='text-xl mr-4 text-gray-500'>Publish Year</span>
-            <span>{book._publishYear}</span>
+            <span>{book.publishYear}</span>
           </div>
           <div className='my-4'>
             <span className='text-xl mr-4 text-gray-500'>Create Time</span>
-            <span>{new Date(book.createAt).toString()}</span>
+            <span>{new Date(book.createdAt).toString()}</span>
           </div>
           <div className='my-4'>
             <span className='text-xl mr-4 text-gray-500'>Last Updated Time</span>
-            <span>{new Date(book.updateAt).toString()}</span>
+            <span>{new Date(book.updatedAt).toString()}</span>
           </div>
         </div>
       )}
