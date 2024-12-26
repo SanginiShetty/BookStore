@@ -42,14 +42,31 @@ const CreateBook = () => {
           <input 
           type= 'text'
           value={title}
-          onChange= {(e) => setTirle(e.target.value)}
+          onChange= {(e) => setTitle(e.target.value)}
           className='border-2 border-gray-500 px-4 py-2 w-full'
           />
         </div>
-        <div className ='texr-xl'>
-
+        <div className ='my-4'>
+          <div className='text-xl mr-4 text-gray-500'>Author</div>
+          <input 
+          typr='text'
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
+          className='border-2 border-gray-500 px-4 py-2 w-full'
+          />
         </div>
-
+        <div className ='my-4'>
+          <div className='text-xl mr-4 text-gray-500'>Publish Year</div>
+          <input 
+          typr='number'
+          value={publishYear}
+          onChange={(e) => setPublishYear(e.target.value)}
+          className='border-2 border-gray-500 px-4 py-2 w-full'
+          />
+        </div>
+        <button className='p-2 bg-sky-300 m-8' onClick={handleSaveBook}>
+          Save
+        </button>
       </div>
     </div>
   )
