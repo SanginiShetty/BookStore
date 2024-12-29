@@ -13,9 +13,19 @@ const EditBook = () => {
   const {id}= useParams();
   useEffect(() => {
     setLoading(true);
-  })
+    axios.get(`http://localhost:5555/api/books/${id}`)
+    .then((res) => {
+      setAuthor(res.data.author);
+      setPublishYear(res.data.publishYear);
+      setTitle(res.data.title)
+      setLoading(false);
+    }).catch((error) => {
+      alert('An error happened. Please Check console.');
+      console.log(error);
+    });
+  },[])
 
-  const handleSaveBook = () => {
+  const handleEditBook = () => {
     const data = { 
       title,
       author,
@@ -23,7 +33,7 @@ const EditBook = () => {
     };
     setLoading(true);
     axios
-    .post('http://localhost:5555/api/books', data)
+    .put(`http://localhost:5555/api/books/${id}`, data)
     .then(() => {
       setLoading(false);
       navigate('/');
@@ -68,7 +78,7 @@ const EditBook = () => {
           className='border-2 border-gray-500 px-4 py-2 w-full'
           />
         </div>
-        <button className='p-2 bg-sky-300 m-8' onClick={handleSaveBook}>
+        <button className='p-2 bg-sky-300 m-8' onClick={handleEditBook}>
           Save
         </button>
       </div>
