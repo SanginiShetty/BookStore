@@ -13,8 +13,9 @@ const Home = () => {
 
   useEffect(() => {
     setLoading(true);
+    // Use the environment variable for the backend URL
     axios
-      .get("http://localhost:5555/api/books")
+      .get(`${import.meta.env.VITE_BACKEND_URL}/books`)
       .then((res) => {
         setBooks(res.data.data);
         setLoading(false);
